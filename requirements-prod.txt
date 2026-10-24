@@ -1,0 +1,8 @@
+# 生产主服务：在核心依赖之上追加真实中间件客户端
+# 安装：pip install -r requirements-prod.txt（会先装 requirements.txt）
+-r requirements.txt
+
+httpx>=0.27.0
+pymilvus>=2.4.0
+elasticsearch>=8.15.0
+dashscope>=1.20.0

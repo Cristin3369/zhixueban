@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>智学伴</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <section id="view-onboard" class="view onboard">
+        <div class="onboard-card wide">
+          <p class="eyebrow">报到 · 不用账号密码</p>
+          <h1>登录智学伴</h1>
+          <p class="lede">
+            写下名字、选考研，填学校、专业。教材一条一条加：书名 + 版本。英语一般没有教材，把「英语一」或「英语二」当书名即可。
+          </p>
+          <form id="onboard-form">
+            <label>
+              你的名字
+              <input id="user-name" name="user_name" placeholder="例如 荣婷" required autocomplete="name" />
+            </label>
+            <fieldset>
+              <legend>你在备哪一类</legend>
+              <div class="track-picks">
+                <label class="track-card">
+                  <input type="radio" name="exam_track" value="考研" checked />
+                  <span>考研</span>
+                  <small>初试日按全国统考自动计算</small>
+                </label>
+                <label class="track-card disabled" title="即将开放">
+                  <input type="radio" name="exam_track" value="考公" disabled />
+                  <span>考公</span>
+                  <small>即将开放</small>
+                </label>
+              </div>
+            </fieldset>
+            <label>
+              考什么学校
+              <input id="school" placeholder="例如 北京大学" required />
+            </label>
+            <label>
+              什么专业
+              <input id="major" placeholder="例如 计算机科学与技术" required />
+            </label>
+            <fieldset class="book-fieldset">
+              <legend>什么教材</legend>
+              <p class="muted small">
+                可粘贴「专业课：数学分析，同济第4版，英语1，政治」。政治默认记成肖秀荣1000题。专业课能加多本。英语不填版本。
+              </p>
+              <div id="login-books" class="book-editor"></div>
+            </fieldset>
+            <p class="muted small">考研初试是每年 12 月第三个星期六。科目窗口登录后再起名。</p>
+            <button type="submit" class="btn primary">登录</button>
+            <p id="onboard-error" class="error" hidden></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="view-home" class="view hub" hidden>
+        <header class="hub-bar">
+          <button type="button" class="nav" data-nav="chat">对话</button>
+          <div class="hub-right">
+            <button type="button" class="nav" data-nav="today">今日</button>
+            <button type="button" class="nav" data-nav="me">我的</button>
+          </div>
+        </header>
+        <div class="hub-hero">
+          <h1>智学伴</h1>
+          <button type="button" class="btn primary hub-create" id="btn-home-new">创建对话</button>
+          <div id="home-windows" class="home-windows"></div>
+        </div>
+      </section>
+
+      <section id="view-chat" class="view chat-page" hidden>
+        <header class="chat-bar">
+          <button type="button" class="nav" id="btn-back">返回</button>
+          <h1 id="chat-title">对话</h1>
+          <button type="button" class="nav" id="btn-sheet">会话</button>
+        </header>
+        <div id="chat-room" class="chat-stage">
+          <div id="messages" class="messages"></div>
+          <form id="chat-form" class="composer">
+            <textarea id="chat-input" rows="2" placeholder="输入问题，Enter 发送"></textarea>
+            <button type="submit" class="btn primary" id="btn-send">发送</button>
+          </form>
+        </div>
+      </section>
+
+      <aside id="side-sheet" class="sheet" hidden>
+        <div class="sheet-backdrop" id="sheet-backdrop"></div>
+        <div class="sheet-panel">
+          <p class="aside-title">切换对话</p>
+          <button type="button" class="btn primary aside-new" id="btn-sheet-new">创建对话</button>
+          <div id="window-list" class="rail-list"></div>
+        </div>
+      </aside>
+
+      <section id="view-today" class="view app-page" hidden>
+        <header class="hub-bar">
+          <button type="button" class="nav" data-nav="chat">对话</button>
+          <div class="hub-right">
+            <button type="button" class="nav on" data-nav="today">今日</button>
+            <button type="button" class="nav" data-nav="me">我的</button>
+          </div>
+        </header>
+        <div class="page">
+          <div id="countdown-card" class="hero"></div>
+          <p id="dash-message" class="muted"></p>
+          <div id="blocks" class="blocks"></div>
+        </div>
+      </section>
+
+      <section id="view-me" class="view app-page" hidden>
+        <header class="hub-bar">
+          <button type="button" class="nav" data-nav="chat">对话</button>
+          <div class="hub-right">
+            <button type="button" class="nav" data-nav="today">今日</button>
+            <button type="button" class="nav on" data-nav="me">我的</button>
+          </div>
+        </header>
+        <div class="page">
+          <div class="me-card wide">
+            <p class="eyebrow">个人</p>
+            <h2>备考资料</h2>
+            <p id="exam-date-hint" class="muted"></p>
+            <form id="profile-form">
+              <label>
+                名字
+                <input id="me-name" required />
+              </label>
+              <fieldset>
+                <legend>备考类型</legend>
+                <div class="track-picks">
+                  <label class="track-card">
+                    <input type="radio" name="me_exam_track" value="考研" checked />
+                    <span>考研</span>
+                    <small>考试日自动计算</small>
+                  </label>
+                  <label class="track-card disabled" title="即将开放">
+                    <input type="radio" name="me_exam_track" value="考公" disabled />
+                    <span>考公</span>
+                    <small>即将开放</small>
+                  </label>
+                </div>
+              </fieldset>
+              <label>
+                学校
+                <input id="me-school" required />
+              </label>
+              <label>
+                专业
+                <input id="me-major" required />
+              </label>
+              <fieldset class="book-fieldset">
+                <legend>教材</legend>
+                <div id="me-books" class="book-editor"></div>
+              </fieldset>
+              <p class="muted small">已开过的对话窗口会保留。改学校、专业或教材后，新对话会按新资料检索。</p>
+              <button type="submit" class="btn primary">保存</button>
+              <button type="button" class="btn ghost" id="btn-reset">退出登录</button>
+              <p id="me-status" class="muted small" hidden></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="name-modal" class="modal" hidden>
+      <div class="modal-card">
+        <p class="eyebrow">新建对话</p>
+        <h2>给这个窗口起个名字</h2>
+        <p class="lede">这个名字就是这一科的专属会话。数学窗口里问过的题，不会出现在英语窗口。</p>
+        <form id="name-form">
+          <label>
+            窗口名
+            <input id="window-title" placeholder="例如 高等数学、英语一、408" required maxlength="32" />
+          </label>
+          <div class="modal-actions">
+            <button type="button" class="btn ghost" id="btn-cancel-name">取消</button>
+            <button type="submit" class="btn primary">打开对话</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

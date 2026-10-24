@@ -1,0 +1,13 @@
+# 核心依赖：不连 Redis / Neo4j / Milvus 也能跑通 startgraph.py、本地演示与 tests
+# 生产中间件见 requirements-prod.txt；GPU 嵌入与重排见 requirements-gpu.txt
+fastapi>=0.110.0
+uvicorn>=0.27.0
+pydantic>=2.0.0
+redis>=5.0.0
+neo4j>=5.0.0
+langgraph>=0.2.0
+langchain>=0.2.0
+langchain-openai>=0.1.0
+langchain-core>=0.2.0
+numpy>=1.24.0
+python-dotenv>=1.0.0

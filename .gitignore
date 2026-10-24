@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# 密钥与本机配置
+.env
+deploy/.env
+*.local.yaml
+*.local.yml
+
+# 运行产物
+*.sqlite
+*.sqlite3
+*.db
+*.log
+
+# 本机教材/真题原件（有版权，不入库）
+data_raw/
+
+# 知识切片数据（教材原文 + 截图，有版权；只保留目录说明 data/kb/README.md）
+data/kb/ch1/
+
+# Docker 数据卷（compose 默认用 named volumes；若改成 bind mount 到 ./volumes 则忽略）
+volumes/
+
+# 模型与大文件
+*.pt
+*.bin
+*.safetensors
+models/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# 个人备忘，不上传
+docs/面试题-大模型算法应用.md

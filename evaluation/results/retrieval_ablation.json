@@ -1,0 +1,30 @@
+{
+  "metrics": {
+    "bm25": {
+      "recall@3": 1.0,
+      "ndcg@3": 0.7103,
+      "mrr": 0.6111,
+      "n": 3.0
+    },
+    "vector": {
+      "recall@3": 1.0,
+      "ndcg@3": 1.0,
+      "mrr": 1.0,
+      "n": 3.0
+    },
+    "hybrid_rrf": {
+      "recall@3": 1.0,
+      "ndcg@3": 0.877,
+      "mrr": 0.8333,
+      "n": 3.0
+    },
+    "hybrid_rerank": {
+      "recall@3": 1.0,
+      "ndcg@3": 1.0,
+      "mrr": 1.0,
+      "n": 3.0
+    }
+  },
+  "n_queries": 3,
+  "note": "n_queries<50 时方差大，不要把本文件数字写进简历。换成自建标注集后再对外。"
+}
