@@ -42,7 +42,18 @@ examples/         可直接运行的演示
 
 ## 本地运行
 
-首次创建环境（Python 3.11，环境名 `abhs`）：
+### 获取代码
+
+```bash
+git clone https://github.com/Cristin3369/zhixueban.git
+cd zhixueban
+```
+
+> 没有 git 也可以在 GitHub 页面点 **Code → Download ZIP** 解压。
+
+### 创建环境
+
+首次创建（Python 3.11，环境名 `abhs`）：
 
 ```bash
 conda env create -f environment.yml
@@ -109,3 +120,13 @@ python -m production.ingest --jsonl data/kb/你的切片.jsonl
 - 没有教材、真题全文。`python startgraph.py` 启动时只写入一句示例。生产入库要自己准备 `text / subject / book_name / page` 的 jsonl，有版权的书不要放进仓库。
 - 没有微调权重。陪伴在未配置 `COMPANION_BASE_URL` 时走规则模板，危机话术不经过生成模型。
 - `evaluation/results/retrieval_ablation.json` 只有 3 条查询，不能当作检索效果。
+
+## 日常开发
+
+```bash
+git add -A
+git commit -m "feat: 说明改动"
+git push
+```
+
+`.gitignore` 已排除 `data/kb/ch1/`（版权数据）、`deploy/.env`（密钥）、`__pycache__/` 等，不会误提交。
